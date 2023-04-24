@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "358554987132",
+    "project_id": "enota-3ee46",
+    "storage_bucket": "enota-3ee46.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:358554987132:android:2819b6e258b9139150f7f9",
+        "android_client_info": {
+          "package_name": "com.example.enota_dsm"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "358554987132-iq55c7e7ikk1stat0d254vbf9h3qc7ro.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDXuz57pfW3SCXyRZAyCCZ6nozRmxsq6Ck"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "358554987132-iq55c7e7ikk1stat0d254vbf9h3qc7ro.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
