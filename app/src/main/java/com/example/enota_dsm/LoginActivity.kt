@@ -1,6 +1,8 @@
 package com.example.enota_dsm
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
@@ -29,11 +31,16 @@ class LoginActivity : AppCompatActivity() {
             val email = findViewById<EditText>(R.id.editTextEmailAddress).text.toString()
             val password = findViewById<EditText>(R.id.txtPassword).text.toString()
             this.login(email,password)
+            //---------------------
+
+            //---------------------
         }
+        
         textViewRegister = findViewById<TextView>(R.id.textViewRegister)
         textViewRegister.setOnClickListener {
             this.goToRegister()
         }
+
     }
 
     private fun login(email: String, password: String){
@@ -41,6 +48,7 @@ class LoginActivity : AppCompatActivity() {
             if (task.isSuccessful){
                 val intent = Intent(this, MainActivity::class.java)
                 startActivity(intent)
+
                 finish()
             }
         }.addOnFailureListener { exception ->

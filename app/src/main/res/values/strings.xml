@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">ENota_DSM</string>
+    <string name="prefs_file">com.example.enota_dsm.PREFERENCE_FILE_KEY</string>
 </resources>

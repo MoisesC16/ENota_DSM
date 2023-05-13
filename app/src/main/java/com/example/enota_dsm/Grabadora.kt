@@ -17,6 +17,7 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import java.io.File
@@ -51,16 +52,18 @@ class Grabadora : AppCompatActivity() {
     fun grabar(view : View){
 
         if(grabadora==null) {
+
             val dateFormat = SimpleDateFormat("MM_dd_HH_mm_ss", Locale.getDefault())
             val currentDate = dateFormat.format(Date())
             val fileName = "Audio_$currentDate.mp3"
             val dir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MUSIC)
             val outputFile = File(dir, fileName)
+            ruta = outputFile.toString()
             grabadora = MediaRecorder().apply {
                 setAudioSource(MediaRecorder.AudioSource.MIC)
                 setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP)
                 setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB)
-                setOutputFile(outputFile)
+                setOutputFile(ruta)
             }
             try {
 
@@ -68,12 +71,14 @@ class Grabadora : AppCompatActivity() {
                 grabadora?.start()
                 imgGrabar?.setBackgroundColor(Color.RED)
                 Toast.makeText(applicationContext, "Grabando...", Toast.LENGTH_SHORT).show()
+
             } catch (e: IOException) {
                 println(e)
             }
-        }else{
+        }else {
 
             try {
+
                 grabadora?.stop()
               //  grabadora?.reset()
                 grabadora?.release()
@@ -83,13 +88,16 @@ class Grabadora : AppCompatActivity() {
                 imgGrabar?.setBackgroundColor(Color.BLACK)
 
                 Toast.makeText(applicationContext, "Grabación Terminada", Toast.LENGTH_SHORT).show()
+
+                grabadora = null
+
             }catch (e:IOException){
                 println(e)
             }
         }
     }
 
-    private fun UbicacionArchivo(): String {
+  /*  private fun UbicacionArchivo(): String {
         if(ruta == null) {
             val folder = File(getExternalStorageDirectory(), "ENota_DSM")
             if(!folder.exists()) {
@@ -98,7 +106,7 @@ class Grabadora : AppCompatActivity() {
             ruta = "${folder.absolutePath}/${System.currentTimeMillis()}.mp3"
         }
         return ruta as String
-    }
+    }*/
     fun reproducir(view : View){
         var mediaPlayer = MediaPlayer()
         try{
@@ -110,4 +118,23 @@ class Grabadora : AppCompatActivity() {
         mediaPlayer.start()
         Toast.makeText(applicationContext, "Reproduciendo Audio", Toast.LENGTH_SHORT).show()
     }
+
+
+
+
+
+
+
+
+    private fun showAlert(){
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle("Error")
+        builder.setMessage("Se ha producido un error autenticando al usuario")
+        builder.setPositiveButton("Aceptar", null)
+        val dialog: AlertDialog =builder.create()
+        dialog.show()
 }
+}
+
+
+
