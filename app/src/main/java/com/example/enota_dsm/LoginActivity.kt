@@ -13,6 +13,8 @@ class LoginActivity : AppCompatActivity() {
 
     private lateinit var auth: FirebaseAuth
 
+
+
     private lateinit var btnLogin: Button
     private lateinit var textViewRegister: TextView
 
