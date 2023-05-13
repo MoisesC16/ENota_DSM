@@ -100,10 +100,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtPass">
     </Button>
+
     <Button
         android:id="@+id/btn_google_sign_in"
-        android:layout_width="149dp"
-        android:layout_height="60dp"
+        android:layout_width="89dp"
+        android:layout_height="79dp"
+        android:background="@color/white"
+        android:backgroundTint="@color/white"
+        android:drawableStart="@drawable/google"
+        android:drawableTint="#FFFFFF"
+        android:foreground="@drawable/icon"
+        app:icon="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

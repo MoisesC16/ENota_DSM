@@ -62,15 +62,15 @@ class RegisterActivity : AppCompatActivity() {
 
     }
 
-    override fun onResume() {
+    /*override fun onResume() {
         super.onResume()
         auth.addAuthStateListener(authStateListener)
-    }
+    }*/
 
-    override fun onPause() {
+   /* override fun onPause() {
         super.onPause()
         auth.removeAuthStateListener(authStateListener)
-    }
+    }*/
 
     private fun register(email: String, password: String){
         auth.createUserWithEmailAndPassword(email,password).addOnCompleteListener { task ->

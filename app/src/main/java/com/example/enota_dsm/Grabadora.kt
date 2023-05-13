@@ -49,13 +49,13 @@ class Grabadora : AppCompatActivity() {
 
     @RequiresApi(Build.VERSION_CODES.N)
     fun grabar(view : View){
-        val dateFormat = SimpleDateFormat("MM_dd_HH_mm_ss", Locale.getDefault())
-        val currentDate = dateFormat.format(Date())
-        val fileName = "Audio_$currentDate.mp3"
-        val dir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MUSIC)
-        val outputFile = File(dir, fileName)
-        if(grabadora==null) {
 
+        if(grabadora==null) {
+            val dateFormat = SimpleDateFormat("MM_dd_HH_mm_ss", Locale.getDefault())
+            val currentDate = dateFormat.format(Date())
+            val fileName = "Audio_$currentDate.mp3"
+            val dir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MUSIC)
+            val outputFile = File(dir, fileName)
             grabadora = MediaRecorder().apply {
                 setAudioSource(MediaRecorder.AudioSource.MIC)
                 setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP)
