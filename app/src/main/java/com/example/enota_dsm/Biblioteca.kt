@@ -96,12 +96,19 @@ class Biblioteca : AppCompatActivity() {
         startActivity(Intent.createChooser(shareIntent, "Share Audio"))
     }
 fun editName(audio: File){
+
     val audioDir = File(getExternalStoragePublicDirectory(Environment.DIRECTORY_MUSIC), "")
     val audioFiles = audioDir.listFiles { file -> file.extension == "mp3" }
+
     val audioNames = mutableListOf<String>()
     audioFiles?.forEach { file ->
         audioNames.add(file.name)
     }
+    val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, audioNames)
+
+// Configura el ListView para utilizar el ArrayAdapter
+    val listView = findViewById<ListView>(R.id.list_view)
+    listView.adapter = adapter
 
     val builder = AlertDialog.Builder(this)
     builder.setTitle("Editar nombre")
@@ -115,11 +122,11 @@ fun editName(audio: File){
         val newFileName = "$newAudioName.mp3"
         val newFile = File(audio.parent, newFileName)
         if (audio.renameTo(newFile)) {
-            Toast.makeText(applicationContext, "Renombrado con éxito $newFile", Toast.LENGTH_SHORT).show()
+            Toast.makeText(applicationContext, "Renombrado con éxito", Toast.LENGTH_SHORT).show()
             // El archivo se ha renombrado con éxito
             updateAudioList()
         } else {
-            Toast.makeText(applicationContext, "Error$newFile", Toast.LENGTH_SHORT).show()
+            Toast.makeText(applicationContext, "Error", Toast.LENGTH_SHORT).show()
             // No se pudo renombrar el archivo
         }
 
@@ -169,59 +176,10 @@ fun editName(audio: File){
 
 
         registerForContextMenu(listView)
-        // Actualizar la lista de audios en el adaptador
 
-
-        // Notificar al adaptador de que los datos han cambiado
 
     }
 
-    /* override fun onCreateContextMenu(menu: ContextMenu, v: View, menuInfo: ContextMenu.ContextMenuInfo?) {
-         super.onCreateContextMenu(menu, v, menuInfo)
-         val inflater = menuInflater
-         inflater.inflate(R.menu.menu, menu)
-     }*/
-
-
-   /* private fun showRenameDialog(selectedFile: File) {
-        val audioDir = File(getExternalStoragePublicDirectory(Environment.DIRECTORY_MUSIC), "")
-        val audioFiles = audioDir.listFiles { file -> file.extension == "mp3" }
-        val audioNames = mutableListOf<String>()
-        audioFiles?.forEach { file ->
-            audioNames.add(file.name)
-        }
-        val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, audioNames)
-
-        input.setText(selectedFile.nameWithoutExtension)
-
-        AlertDialog.Builder(this)
-            .setTitle(R.string.dialog_title_rename)
-            .setView(view)
-            .setPositiveButton(R.string.dialog_button_rename) { dialog, _ ->
-                val newName = input.text.toString()
-                val newFile = File(selectedFile.parent, "$newName.${selectedFile.extension}")
-                selectedFile.renameTo(newFile)
-                updateAudioList()
-                dialog.dismiss()
-            }
-            .setNegativeButton(R.string.dialog_button_cancel) { dialog, _ ->
-                dialog.cancel()
-            }
-            .create()
-            .show()
-    }
-    private fun updateAudioList() {
-        val audioDir = File(getExternalStoragePublicDirectory(Environment.DIRECTORY_MUSIC), "")
-        val audioFiles = audioDir.listFiles { file -> file.extension == "mp3" }
-        val audioNames = mutableListOf<String>()
-        audioFiles?.forEach { file ->
-            audioNames.add(file.name)
-        }
-        val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, audioNames)
-       audioNames.clear()
-        audioNames.addAll(getAudioFiles())
-        adapter.notifyDataSetChanged()
-    }*/
 
 
 }

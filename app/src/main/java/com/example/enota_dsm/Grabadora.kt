@@ -97,16 +97,7 @@ class Grabadora : AppCompatActivity() {
         }
     }
 
-  /*  private fun UbicacionArchivo(): String {
-        if(ruta == null) {
-            val folder = File(getExternalStorageDirectory(), "ENota_DSM")
-            if(!folder.exists()) {
-                folder.mkdirs()
-            }
-            ruta = "${folder.absolutePath}/${System.currentTimeMillis()}.mp3"
-        }
-        return ruta as String
-    }*/
+  
     fun reproducir(view : View){
         var mediaPlayer = MediaPlayer()
         try{
