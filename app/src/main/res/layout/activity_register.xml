@@ -103,8 +103,8 @@
 
     <Button
         android:id="@+id/btn_google_sign_in"
-        android:layout_width="89dp"
-        android:layout_height="79dp"
+        android:layout_width="68dp"
+        android:layout_height="68dp"
         android:background="@color/white"
         android:backgroundTint="@color/white"
         android:drawableStart="@drawable/google"
@@ -113,10 +113,12 @@
         app:icon="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.87"
+        app:layout_constraintVertical_bias="0.861"
         tools:ignore="MissingConstraints"></Button>
+
     <EditText
         android:id="@+id/txtPass"
         android:layout_width="237dp"

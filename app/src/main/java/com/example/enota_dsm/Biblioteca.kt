@@ -1,7 +1,7 @@
 package com.example.enota_dsm
 
 import android.Manifest
-import android.app.AlertDialog
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.media.MediaPlayer
 import android.net.Uri
@@ -10,12 +10,9 @@ import android.os.Bundle
 import android.os.Environment
 import android.os.Environment.getExternalStoragePublicDirectory
 import android.view.ContextMenu
-import android.view.LayoutInflater
-import android.view.MenuItem
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.EditText
 import android.widget.ListView
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -50,7 +47,7 @@ class Biblioteca : AppCompatActivity() {
         listView.adapter = adapter
 
 
-
+        registerForContextMenu(listView)
 
 
 // Cuando un elemento de la lista se hace clic, reproduce el archivo de audio correspondiente
@@ -71,6 +68,31 @@ class Biblioteca : AppCompatActivity() {
 
     }
 
+   override fun onCreateContextMenu(menu: ContextMenu?, v: View?, menuInfo: ContextMenu.ContextMenuInfo?) {
+        val audioDir = File(getExternalStoragePublicDirectory(Environment.DIRECTORY_MUSIC), "")
+        val audioFiles = audioDir.listFiles { file -> file.extension == "mp3" }
+        
+        super.onCreateContextMenu(menu, v, menuInfo)
+        menuInflater.inflate(R.menu.menu, menu)
+        val info = menuInfo as AdapterView.AdapterContextMenuInfo
+        val audio = audioFiles[info.position]
+        menu?.findItem(R.id.share_item)?.setOnMenuItemClickListener {
+            shareAudio(audio)
+            true
+        }
+    }
+    fun shareAudio(audio: File) {
+        val uri = Uri.parse(audio.absolutePath)
+        val shareIntent = Intent(Intent.ACTION_SEND)
+        shareIntent.type = "audio/*"
+        shareIntent.putExtra(Intent.EXTRA_STREAM, uri)
+        startActivity(Intent.createChooser(shareIntent, "Share Audio"))
+    }
 
+   /* override fun onCreateContextMenu(menu: ContextMenu, v: View, menuInfo: ContextMenu.ContextMenuInfo?) {
+        super.onCreateContextMenu(menu, v, menuInfo)
+        val inflater = menuInflater
+        inflater.inflate(R.menu.menu, menu)
+    }*/
 
 }
